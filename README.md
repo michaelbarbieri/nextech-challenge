@@ -5,7 +5,7 @@
 Mike's notes
 -
 
-I originally built a separate .NET Core API and separate Angular app, running on different ports on localhost.  When it came time for a proper integration, before trying to serve the Angular app myself, I found a .NET Core Angular template online.  I ported my code to it, but there's a good bit of boilerplate.
+I originally built a separate .NET Core API and separate Angular app, running on different ports on localhost.  When it came time for a proper integration, before trying to serve the Angular app from within the .NET site, I found a .NET Core Angular template online.  I ported my code to it, but there's a good bit of boilerplate.  (I also had to downgrade from HttpClient because the template uses older versions of the Angular libraries.  Otherwise it was pretty smooth.)
 
 My Angular code is principally in ClientApp/app, and my C# code lives in Controllers (NewsController), Logic, Models, and Services.  I've also touched Startup.cs to add dependency injection.
 
