@@ -1,0 +1,18 @@
+<div class="flex-container">
+    <div class="inner-container">
+        <h3>Hacker News Newest Stories</h3>
+        <div>
+            <input type="text" [(ngModel)]="search" (input)="onSearchChange()" placeholder="Search" />
+        </div>
+        <div class="story-list-container" [ngStyle]="{'min-height': containerHeight}">
+            <div *ngIf="!searching">
+                <app-story *ngFor="let story of stories" [story]="story"></app-story>
+            </div>
+            <div class="search-message" [ngStyle]="{'min-height': containerHeight}" *ngIf="searching"><span>Searching...</span></div>
+        </div>
+        <div class="button-container">
+            <button [disabled]="searching || page <= 0" (click)="onPrevClick()">Prev Page</button>
+            <button [disabled]="searching || page >= totalPages - 1" (click)="onNextClick()">Next Page</button>
+        </div>
+    </div>
+</div>
