@@ -5,6 +5,20 @@
 Mike's notes
 -
 
+11/9/2020
+
+Reverted to the separate apps, and configured .NET Core to serve a Spa application.  This is easier to get the test systems working since the Angular Jasmine testing works out of the box with the Angular CLI app (which I originally wrote) but not with the Angular app based on the Microsoft Core/Angular template.
+
+So now there is an Angular CLI app sitting in the ClientApp/ directory of a .NET Core Web API built from scratch and configured to serve it.  To save Github space I have again omitted the node_modules, so an npm install will need to be run from inside the ClientApp/ directory prior to running.
+
+To run in development in VS Code, "ng serve" must be run from ClientApp/, and then the Web API can be launched from Code.  Do not use the port from ng serve; use the port from the API run, with bare URL, to serve the frontend.  This will connect to the API (they will all use the same port) and the app will work.
+
+Alternatively you can publish the app using "dotnet publish -c release".  After publish, you must move the files from "publish/ClientApp/dist/ClientApp" up one level (into "dist") and it will work.  I'm still working on fixing the release configuration so this is unnecessary.
+
+
+
+11/8/2020
+
 I originally built a separate .NET Core API and separate Angular app, running on different ports on localhost.  When it came time for a proper integration, before trying to serve the Angular app from within the .NET site, I found a .NET Core Angular template online.  I ported my code to it, but there's a good bit of boilerplate.
 
 My Angular code is principally in ClientApp/app, and my C# code lives in Controllers (NewsController), Logic, Models, and Services.  I've also touched Startup.cs to add dependency injection.
