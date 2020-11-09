@@ -24,6 +24,8 @@ export class StoryListComponent implements OnInit {
   totalPages: number = 1;
   stories: Story[];
 
+  // Maintain height during searches.  Uses magic number, can be improved by measuring
+  // height of container element after initial pull and using that.
   containerHeight: string = `${this.numPerPage * 19.5}px`;
   
   ngOnInit(): void {

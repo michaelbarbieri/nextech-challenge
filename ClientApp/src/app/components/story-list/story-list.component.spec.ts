@@ -24,4 +24,39 @@ describe('StoryListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+
+
+
+  it('should call getStories only once in quick succession of onSearchChange calls', async () => {
+    spyOn(component, "getStories");
+    for(let i = 0; i < 5; i++) {
+      component.onSearchChange();
+      await sleep(100);
+    }
+    await sleep(1000) // debounce
+    expect(component.getStories).toHaveBeenCalledTimes(1);
+  });
+  
+  it('should call getStories twice if debounce timer expired between onSearchChange calls', async () => {
+    spyOn(component, "getStories");
+    for(let i = 0; i < 5; i++) {
+      component.onSearchChange();
+      await sleep(100);
+    }
+    await sleep(1000)
+    for(let i = 0; i < 5; i++) {
+      component.onSearchChange();
+      await sleep(100);
+    }
+    await sleep(1000)
+    expect(component.getStories).toHaveBeenCalledTimes(2);
+  });
+  
 });
+
+function sleep(millis: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, millis));
+}
+

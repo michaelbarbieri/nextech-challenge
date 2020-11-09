@@ -23,7 +23,9 @@ export class StoryComponent implements OnInit {
     try {
       website = this.story.url;
       website = website.substring(website.indexOf("//") + 2);
-      website = website.substring(0, website.indexOf("/"));
+      if(website.indexOf("/") >= 0) {
+        website = website.substring(0, website.indexOf("/"));
+      }
       if(website.startsWith("www")) {
         website = website.substring(4);
       }
