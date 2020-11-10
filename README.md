@@ -19,8 +19,7 @@ To run in development mode:
 To run in release mode:
 
 1. Run **dotnet publish -c release** from root directory.
-2. In the release directory (bin/...etc), move the files from "publish/ClientApp/dist/ClientApp" up one level (to "dist").  I have as yet been unable to figure out how to configure the deployment to place these files here to begin with.
-3. Run NextechChallenge.exe, then point a browser to where it says it's running (e.g. http://localhost:5000)
+2. Run **bin/release/netcoreapp3.1/publish/NextechChallenge.exe**
 
 To run Angular unit tests:
 

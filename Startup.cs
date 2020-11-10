@@ -31,7 +31,7 @@ namespace NextechChallenge
             // Enable Angular
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp/dist";
+                configuration.RootPath = "ClientApp/dist/ClientApp";
             });
             
             // Dependency injection for News Service
