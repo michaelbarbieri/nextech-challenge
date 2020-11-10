@@ -21,6 +21,8 @@ namespace NewsApi.Controllers
         {
             if(filter == null)
                 filter = "";
+            if(numPerPage == 0)
+                numPerPage = 10;
 
             NewsResult result = await NewsItems.Get(page, numPerPage, filter);
             return new ObjectResult(result);

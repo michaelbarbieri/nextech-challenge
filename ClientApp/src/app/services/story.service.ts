@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { StoryResult } from '../models/story-result';
 
@@ -12,7 +13,6 @@ export class StoryService {
 
   private newsUrl = 'api/news';
 
-  //todo: error handling
   getStories(page: number, num: number, filter: string): Observable<StoryResult> {
     return this.http.get<StoryResult>(
       this.newsUrl,
@@ -23,7 +23,19 @@ export class StoryService {
           filter: filter
         }
       }
+    ).pipe(
+      catchError((err: any, caught: Observable<any>) => {
+        // Return a single "result" with no link that will function as the error message
+        return of({
+          results: [{
+            id: 0,
+            text: "",
+            url: "",
+            title: "Error fetching data"
+          }],
+          totalPages: 1
+        });
+      })
     );
   }
-
 }

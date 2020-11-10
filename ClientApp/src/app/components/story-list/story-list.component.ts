@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Story } from 'src/app/models/story';
 import { StoryService } from 'src/app/services/story.service';
 

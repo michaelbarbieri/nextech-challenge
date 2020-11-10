@@ -2,7 +2,7 @@
     <div class="inner-container">
         <h3>Hacker News Newest Stories</h3>
         <div>
-            <input type="text" [(ngModel)]="search" (input)="onSearchChange()" placeholder="Search" />
+            <input id="searchBox" type="text" [(ngModel)]="search" (input)="onSearchChange()" placeholder="Search" />
         </div>
         <div class="story-list-container" [ngStyle]="{'min-height': containerHeight}">
             <div *ngIf="!searching">
@@ -11,8 +11,8 @@
             <div class="search-message" [ngStyle]="{'min-height': containerHeight}" *ngIf="searching"><span>Searching...</span></div>
         </div>
         <div class="button-container">
-            <button [disabled]="searching || page <= 0" (click)="onPrevClick()">Prev Page</button>
-            <button [disabled]="searching || page >= totalPages - 1" (click)="onNextClick()">Next Page</button>
+            <button id="prevButton" [disabled]="searching || page <= 0" (click)="onPrevClick()">Prev Page</button>
+            <button id="nextButton" [disabled]="searching || page >= totalPages - 1" (click)="onNextClick()">Next Page</button>
         </div>
     </div>
 </div>

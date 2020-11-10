@@ -5,27 +5,39 @@
 Mike's notes
 -
 
-11/9/2020
+Setup:
 
-Reverted to the separate apps, and configured .NET Core to serve a Spa application.  This is easier to get the test systems working since the Angular Jasmine testing works out of the box with the Angular CLI app (which I originally wrote) but not with the Angular app based on the Microsoft Core/Angular template.
+1. Clone repository.
+2. Run npm install from the ClientApp/ directory.
 
-So now there is an Angular CLI app sitting in the ClientApp/ directory of a .NET Core Web API built from scratch and configured to serve it.  To save Github space I have again omitted the node_modules, so an npm install will need to be run from inside the ClientApp/ directory prior to running.
+To run in development mode:
 
-To run in development in VS Code, "ng serve" must be run from ClientApp/, and then the Web API can be launched from Code.  Do not use the port from ng serve; use the port from the API run, with bare URL, to serve the frontend.  This will connect to the API (they will all use the same port) and the app will work.
+1. Run "ng serve" from the ClientApp/ directory.  Do not use -o (discard any browser windows that open).
+2. Run the Web API from a debugger (e.g. VS Code F5)
+3. Point a browser to the root path of the running Web API (e.g. http://localhost:5000)
 
-Alternatively you can publish the app using "dotnet publish -c release".  After publish, you must move the files from "publish/ClientApp/dist/ClientApp" up one level (into "dist") and it will work.  I'm still working on fixing the release configuration so this is unnecessary.
+To run in release mode:
 
+1. Run "dotnet publish -c release" from root directory.
+2. In the release directory (bin/...etc), move the files from "publish/ClientApp/dist/ClientApp" up one level (to "dist").  I have as yet been unable to figure out how to configure the deployment to place these files here to begin with.
+3. Run NextechChallenge.exe, then point a browser to where it says it's running (e.g. http://localhost:5000)
 
+To run Angular unit tests:
 
-11/8/2020
+1. Run "ng test" from the ClientApp/ directory.
+2. Use "Ctrl + C" to end testing.
 
-I originally built a separate .NET Core API and separate Angular app, running on different ports on localhost.  When it came time for a proper integration, before trying to serve the Angular app from within the .NET site, I found a .NET Core Angular template online.  I ported my code to it, but there's a good bit of boilerplate.
+To run Angular integration tests:
 
-My Angular code is principally in ClientApp/app, and my C# code lives in Controllers (NewsController), Logic, Models, and Services.  I've also touched Startup.cs to add dependency injection.
+1. Run "ng e2e" from the ClientApp/ directory.
 
-It should build and run out of the gate in VS Code if you do an npm install first.
+To run C# unit tests:
 
-My experience with automated testing is pretty scant and I'm still working that part out.  The rest is pretty much finished.
+1. Comment out "<StartupObject>NextechChallenge.Program</StartupObject>" in NextechChallenge.csproj.
+2. Comment out the Main method in Startup.cs.
+3. Use an Xunit IDE tool to run the tests in the Tests/ directory.
+
+The first two steps are necessary because I couldn't for the life of me figure out how else to do it.  There appears to be a conflicting "Main" method in one of the libraries used for testing (I believe Microsoft.NET.Test.Sdk) and this confuses the build because it doesn't know which entry point to use.  The testing one seems to be necessary to make unit tests work, but the one in Startup.cs is of course necessary to make the app itself run.
 
 ---
 

@@ -61,14 +61,15 @@ namespace NewsApi.Services
         }
 
 
+
+
+        // Implements INewsService.Get
         public async Task<NewsResult> Get(int page, int numPerPage, string filter)
         {
             List<int> top = await GetTopStories();
             NewsResult result = await PageAndFilterStories(top, filter, page, numPerPage);
             return result;
         }
-
-
         
         private async Task<NewsResult> PageAndFilterStories(List<int> ids, string filter, int page, int numPerPage)
         {
@@ -77,53 +78,29 @@ namespace NewsApi.Services
             // If the filter is empty, do the paging now.  This will save a ton of unnecessary API calls, at
             // least before caching kicks in.
             if(filter.Trim() == "")
-                ApplyPageFilter(ids, page, numPerPage);
+                Filters.ApplyPageFilter(ids, page, numPerPage);
 
             // Get the items from the cache or the API.
             List<NewsItem> items = await GetNewsItems(ids);
 
             // Apply a simple text filter to the items.
-            List<NewsItem> filtered = ApplyTextFilter(items, filter);
+            Filters.ApplyTextFilter(items, filter);
 
             // Apply paging to the filtered results.
             if(filter.Trim() != "")
             {
-                totalFilteredItems = filtered.Count;
-                ApplyPageFilter(filtered, page, numPerPage);
+                totalFilteredItems = items.Count;
+                Filters.ApplyPageFilter(items, page, numPerPage);
             }
 
             // Package results.
             // This had more than one member when I was considering doing traditional paging (vs. Reddit style paging)
             return new NewsResult()
             {
-                Results = filtered.ToArray(),
+                Results = items.ToArray(),
                 TotalPages = (totalFilteredItems % numPerPage == 0) ? (totalFilteredItems / numPerPage) : (totalFilteredItems / numPerPage + 1)
             };
         }
-
-        // Slice off the front and back of the list according to paging parameters.
-        private void ApplyPageFilter<T>(List<T> items, int page, int numPerPage)
-        {
-            if(items.Count > numPerPage) {
-                items.RemoveRange(0, page * numPerPage);
-                if(items.Count > numPerPage)
-                    items.RemoveRange(numPerPage, items.Count - numPerPage);
-            }
-        }
-
-
-        // Basic case-insensitive text search
-        private List<NewsItem> ApplyTextFilter(List<NewsItem> items, string filter)
-        {
-            string loweredFilter = filter.ToLower();
-            List<NewsItem> filtered = (from item in items
-                                       where item.Title.ToLower().Contains(loweredFilter)
-                                       select item).ToList();
-            return filtered;
-        }
-
-
-
 
     }
 }
