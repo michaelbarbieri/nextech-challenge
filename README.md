@@ -12,33 +12,33 @@ Setup:
 
 To run in development mode:
 
-1. Run "ng serve" from the ClientApp/ directory.  Do not use -o (discard any browser windows that open).
+1. Run **ng serve** from the ClientApp/ directory.  Do not use -o (discard any browser windows that open).
 2. Run the Web API from a debugger (e.g. VS Code F5)
 3. Point a browser to the root path of the running Web API (e.g. http://localhost:5000)
 
 To run in release mode:
 
-1. Run "dotnet publish -c release" from root directory.
+1. Run **dotnet publish -c release** from root directory.
 2. In the release directory (bin/...etc), move the files from "publish/ClientApp/dist/ClientApp" up one level (to "dist").  I have as yet been unable to figure out how to configure the deployment to place these files here to begin with.
 3. Run NextechChallenge.exe, then point a browser to where it says it's running (e.g. http://localhost:5000)
 
 To run Angular unit tests:
 
-1. Run "ng test" from the ClientApp/ directory.
-2. Use "Ctrl + C" to end testing.
+1. Run **ng test** from the ClientApp/ directory.
+2. Use **Ctrl+C** to end testing.
 
 To run Angular integration tests:
 
-1. Close any "ng serve" instances running, but ensure the API is running (port 5000).
-2. Run "ng e2e" from the ClientApp/ directory.
+1. Close any **ng serve** instances running, but ensure the API is running (port 5000).
+2. Run **ng e2e** from the ClientApp/ directory.
 
 To run C# unit tests:
 
-1. Comment out "<StartupObject>NextechChallenge.Program</StartupObject>" in NextechChallenge.csproj.
+1. Comment out **<StartupObject>NextechChallenge.Program</StartupObject>** in NextechChallenge.csproj.
 2. Comment out the Main method in Startup.cs.
 3. Use an Xunit IDE tool to run the tests in the Tests/ directory.
 
-The first two steps are necessary because I couldn't for the life of me figure out how else to do it.  There appears to be a conflicting "Main" method in one of the libraries used for testing (I believe Microsoft.NET.Test.Sdk) and this confuses the build because it doesn't know which entry point to use.  The testing one seems to be necessary to make unit tests work, but the one in Startup.cs is of course necessary to make the app itself run.
+The first two steps are necessary because I couldn't for the life of me figure out how else to do it.  There appears to be a conflicting **Main** method in one of the libraries used for testing (I believe Microsoft.NET.Test.Sdk) and this confuses the build because it doesn't know which entry point to use.  The testing one seems to be necessary to make unit tests work, but the one in Startup.cs is of course necessary to make the app itself run.
 
 ---
 
