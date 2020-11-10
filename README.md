@@ -29,7 +29,8 @@ To run Angular unit tests:
 
 To run Angular integration tests:
 
-1. Run "ng e2e" from the ClientApp/ directory.
+1. Close any "ng serve" instances running, but ensure the API is running (port 5000).
+2. Run "ng e2e" from the ClientApp/ directory.
 
 To run C# unit tests:
 
