@@ -8,7 +8,7 @@ Mike's notes
 Setup:
 
 1. Clone repository.
-2. Run npm install from the ClientApp/ directory.
+2. Run **npm install** from the ClientApp/ directory.
 
 To run in development mode:
 
