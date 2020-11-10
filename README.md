@@ -13,7 +13,7 @@ Setup:
 To run in development mode:
 
 1. Run **ng serve** from the ClientApp/ directory.  Do not use -o (discard any browser windows that open).
-2. Run the Web API from a .NET Core debugger (e.g. VS Code + F5)
+2. Run the Web API from a .NET Core debugger (e.g. VS Code)
 3. Point a browser to the root path of the running Web API (e.g. http://localhost:5000)
 
 To run in release mode:
