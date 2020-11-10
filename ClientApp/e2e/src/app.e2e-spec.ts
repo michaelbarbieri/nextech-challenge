@@ -15,7 +15,7 @@ describe('workspace-project App', () => {
     await sleep(1000); // let data arrive
 
     const stories1 = element.all(by.css('.link'));
-    const textOfStories1 = stories1.map(story => story.getText());
+    const textOfStories1: string[] = await stories1.map(story => story.getText());
 
     element(by.css('#nextButton')).click();
     await sleep(1000);
@@ -23,7 +23,7 @@ describe('workspace-project App', () => {
     await sleep(500);
 
     const stories2 = element.all(by.css('.link'));
-    const textOfStories2 = stories2.map(story => story.getText());
+    const textOfStories2: string[] = await stories2.map(story => story.getText());
 
     expect(textOfStories1).toEqual(textOfStories2);
   });
@@ -33,13 +33,13 @@ describe('workspace-project App', () => {
     await sleep(1000); // let data arrive
 
     const stories1 = element.all(by.css('.link'));
-    const textOfStories1 = stories1.map(story => story.getText());
+    const textOfStories1: string[] = await stories1.map(story => story.getText());
 
     element(by.css('#nextButton')).click();
     await sleep(1000);
 
     const stories2 = element.all(by.css('.link'));
-    const textOfStories2 = stories2.map(story => story.getText());
+    const textOfStories2: string[] = await stories2.map(story => story.getText());
 
     expect(textOfStories1).not.toEqual(textOfStories2);
   });
@@ -55,7 +55,6 @@ describe('workspace-project App', () => {
 
     const stories = element.all(by.css('.link'));
     const textOfStories: string[] = await stories.map(story => story.getText());
-    console.log(textOfStories);
     const notMatching: string[] = textOfStories.filter(value => !value.toLowerCase().includes(searchTerm.toLowerCase()));
     expect(notMatching.length).toEqual(0);
   });
