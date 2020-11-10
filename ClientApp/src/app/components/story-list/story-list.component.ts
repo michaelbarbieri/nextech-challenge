@@ -2,6 +2,9 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Story } from 'src/app/models/story';
 import { StoryService } from 'src/app/services/story.service';
 
+/**
+ * The list of stories, with search bar and navigation buttons.
+ */
 @Component({
   selector: 'app-story-list',
   templateUrl: './story-list.component.html',
@@ -32,6 +35,9 @@ export class StoryListComponent implements OnInit {
     this.getStories();
   }
 
+  /**
+   * Called when anything is typed into the search box.
+   */
   onSearchChange(): void {
     // Manual debounce logic
     if(this.debounceTimer !== null) {
@@ -54,6 +60,10 @@ export class StoryListComponent implements OnInit {
     this.getStories();
   }
 
+  /**
+   * Calls the API to retrieve a page of stories, then sets the appropriate
+   * local variables so the stories will be displayed.
+   */
   getStories(): void {
     this.searching = true;
     this.storyService.getStories(this.page, this.numPerPage, this.search)

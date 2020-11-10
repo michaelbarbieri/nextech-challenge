@@ -4,6 +4,9 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { StoryResult } from '../models/story-result';
 
+/**
+ * Provides stories from the API
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -13,6 +16,12 @@ export class StoryService {
 
   private newsUrl = 'api/news';
 
+  /**
+   * Retrieve a page of stories from the API.
+   * @param page The zero-based page number.
+   * @param num Number of items per page.
+   * @param filter The text filter to apply.  Leave blank for unfiltered results.
+   */
   getStories(page: number, num: number, filter: string): Observable<StoryResult> {
     return this.http.get<StoryResult>(
       this.newsUrl,
